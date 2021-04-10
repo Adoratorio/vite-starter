@@ -5,10 +5,10 @@
   "main": "app/index.js",
   "scripts": {
     "serve": "npm run dev",
-    "dev": "node app/index.js",
+    "dev": "node index.js",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build --ssrManifest --outDir dist/client",
-    "build:server": "vite build --ssr src/entry-server.js --outDir dist/server",
+    "build:server": "vite build --ssr server.js --outDir dist/server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

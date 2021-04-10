@@ -1,4 +1,4 @@
-import { createApp } from '../src/main';
+import { createApp } from './src/main';
 
 // Import the same appa and router code used for
 // the server side html generation
