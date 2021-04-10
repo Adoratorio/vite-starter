@@ -16,6 +16,9 @@
   ],
   "author": "Daniele Borra <daniele@adoratorio.com>",
   "license": "MIT",
+  "repository": {
+    "url": "https://github.com/Adoratorio/vite-starter.git"
+  },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.2.1",
     "@vue/server-renderer": "^3.0.11",
