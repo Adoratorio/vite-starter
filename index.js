@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const { createServer: createViteServer } = require('vite');
 const chalk = require('chalk');
+const static = require('serve-static');
 
 const isDev = process.env.NODE_ENV !== 'production';
 const resolve = (p) => path.resolve(__dirname, p);
@@ -13,13 +14,14 @@ async function start() {
 
   // Initiate the express app and link vite as middleware
   const app = express();
+  app.use(static(resolve('public')));
   let vite = null;
   if (isDev) {
     vite = await createViteServer({ server: { middlewareMode: true }});
     app.use(vite.middlewares);
   } else {
     app.use(require('compression')());
-    app.use(require('serve-static')(resolve('dist/client'), { index: false }));
+    app.use(static(resolve('dist/client'), { index: false }));
   }
 
   // Listen for every request with every method
@@ -65,7 +67,7 @@ async function start() {
       console.error(e);
       res.status(500).end(e.message);
     }
-  })
+  });
 
   console.log(chalk.blue('Server started'));
   console.log(chalk.blue('Listening on: http://localhost:8080'));

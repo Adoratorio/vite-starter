@@ -5,6 +5,12 @@ module.exports = {
     vuePlugin(),
   ],
   clearScreen: false,
+  resolve: {
+    alias: [
+      { find: '@', replacement: '/src' },
+      { find: '~', replacement: '/src' },
+    ],
+  },
   build: {
     minify: false
   },
