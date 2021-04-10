@@ -1,14 +1,16 @@
 <template>
-  <div class="app">
-    <RouterLink to="/">
-      <span>Home</span>
-    </RouterLink>
-    <RouterLink to="/about">
-      <span>About</span>
-    </RouterLink>
+  <main class="app__root">
+    <nav class="navigator">
+      <RouterLink to="/">
+        <span>Home</span>
+      </RouterLink>
+      <RouterLink to="/about">
+        <span>About</span>
+      </RouterLink>
+    </nav>
 
     <RouterView />
-  </div>
+  </main>
 </template>
 
 <script>

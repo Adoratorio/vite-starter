@@ -1,13 +1,20 @@
-import App from './App.vue'
-import { createSSRApp } from 'vue'
-import { createRouter } from './router'
+import App from './App.vue';
+import { createSSRApp } from 'vue';
+import { createRouter } from './router';
+import { createStore } from './store';
 
-// SSR requires a fresh app instance per request, therefore we export a function
-// that creates a fresh app instance. If using Vuex, we'd also be creating a
-// fresh store here.
+// This file will contain all the Universal app code
+// and will run on both server and clinet side
+
+// Export a factory function for the app, the router
+// and the store
 export function createApp() {
   const app = createSSRApp(App);
   const router = createRouter();
+  const store = createStore();
+
   app.use(router);
+  app.use(store);
+
   return { app, router };
 }
