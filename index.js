@@ -9,6 +9,7 @@ const resolve = (p) => path.resolve(__dirname, p);
 
 async function start() {
   console.log(chalk.blue('Starting Adoratorio Vite Starter server'));
+  console.log(chalk.yellow(`Using mode: ${isDev ? 'DEVELOPMENT' : 'PRODUCTION'}`));
 
   // Initiate the express app and link vite as middleware
   const app = express();
@@ -42,12 +43,14 @@ async function start() {
       // then retrive the rendered strings
       // (one for the app and one for the meta links)
       let render = null;
+      let manifest = { };
       if (isDev) {
         render = (await vite.ssrLoadModule('/server.js')).render;
       } else {
         render = require('./dist/server/server.js').render;
+        manifest = require('./dist/client/ssr-manifest.json');
       }
-      const [appHtml, preloadLinks] = await render(url, { });
+      const [appHtml, preloadLinks] = await render(url, manifest);
   
       // Replace the template placeholders
       const html = template

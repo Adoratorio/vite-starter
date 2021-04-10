@@ -5,10 +5,11 @@
   "main": "app/index.js",
   "scripts": {
     "serve": "npm run dev",
-    "dev": "node index.js",
+    "dev": "node index",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build --ssrManifest --outDir dist/client",
     "build:server": "vite build --ssr server.js --outDir dist/server",
+    "try": "cross-env NODE_ENV=production node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -33,6 +34,7 @@
     "vite": "^2.1.5"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "vue": "^3.0.11",
     "vue-router": "^4.0.6",
     "vuex": "^4.0.0"
