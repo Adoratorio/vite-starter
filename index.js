@@ -13,7 +13,9 @@ async function start() {
   console.log(chalk.blue('Starting Adoratorio Vite Starter server'));
   console.log(chalk.yellow(`Using mode: ${isDev ? 'DEVELOPMENT' : 'PRODUCTION'}`));
 
-  // Initiate the express app and link vite as middleware
+  // Initiate the express app, serve public as static folder
+  // and link vite as middleware or serve the builded version
+  // from dist/client folder if in production
   const app = express();
   app.use(serveStatic(resolve('public')));
   let vite = null;
@@ -33,7 +35,7 @@ async function start() {
     try {
       // Read the index.html file from the app folder then apply
       // vite transform injecting hot module reload script and
-      // plugins transforms
+      // plugins transforms or read the builed one if in production
       let template = '';
       if (isDev) {
         template = fs.readFileSync(resolve('index.html'), 'utf-8');
