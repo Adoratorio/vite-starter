@@ -12,6 +12,6 @@ module.exports = {
     ],
   },
   build: {
-    minify: false
+    minify: false,
   },
 };

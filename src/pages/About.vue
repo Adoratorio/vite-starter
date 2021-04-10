@@ -9,7 +9,7 @@ import AppTitle from '@/components/AppTitle.vue';
 
 export default {
   name: 'About',
-  
+
   components: {
     AppTitle,
   },

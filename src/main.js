@@ -1,7 +1,7 @@
-import App from './App.vue';
 import { createSSRApp } from 'vue';
 import { createRouter } from './router';
 import { createStore } from './store';
+import App from './App.vue';
 
 // This file will contain all the Universal app code
 // and will run on both server and clinet side

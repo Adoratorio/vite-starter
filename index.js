@@ -1,9 +1,10 @@
+/* eslint-disable global-require, no-console */
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const { createServer: createViteServer } = require('vite');
 const chalk = require('chalk');
-const static = require('serve-static');
+const serveStatic = require('serve-static');
 
 const isDev = process.env.NODE_ENV !== 'production';
 const resolve = (p) => path.resolve(__dirname, p);
@@ -14,21 +15,21 @@ async function start() {
 
   // Initiate the express app and link vite as middleware
   const app = express();
-  app.use(static(resolve('public')));
+  app.use(serveStatic(resolve('public')));
   let vite = null;
   if (isDev) {
-    vite = await createViteServer({ server: { middlewareMode: true }});
+    vite = await createViteServer({ server: { middlewareMode: true } });
     app.use(vite.middlewares);
   } else {
     app.use(require('compression')());
-    app.use(static(resolve('dist/client'), { index: false }));
+    app.use(serveStatic(resolve('dist/client'), { index: false }));
   }
 
   // Listen for every request with every method
   app.use('*', async (req, res) => {
     const url = req.originalUrl;
     console.log(chalk.yellow(`Request: ${req.method} : ${url}`));
-  
+
     try {
       // Read the index.html file from the app folder then apply
       // vite transform injecting hot module reload script and
@@ -40,7 +41,7 @@ async function start() {
       } else {
         template = fs.readFileSync(resolve('dist/client/index.html'), 'utf-8');
       }
-  
+
       // Use vite for loading the server side render function and
       // then retrive the rendered strings
       // (one for the app and one for the meta links)
@@ -53,17 +54,17 @@ async function start() {
         manifest = require('./dist/client/ssr-manifest.json');
       }
       const [appHtml, preloadLinks] = await render(url, manifest);
-  
+
       // Replace the template placeholders
       const html = template
-        .replace(`<!--preload-links-->`, preloadLinks)
-        .replace(`<!--ssr-outlet-->`, appHtml);
-  
+        .replace('<!--preload-links-->', preloadLinks)
+        .replace('<!--ssr-outlet-->', appHtml);
+
       // Reply the the created page html
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
       // Fix the trace and log the error if any
-      vite && vite.ssrFixStacktrace(e);
+      if (vite) vite.ssrFixStacktrace(e);
       console.error(e);
       res.status(500).end(e.message);
     }
