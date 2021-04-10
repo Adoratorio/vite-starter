@@ -1,0 +1,31 @@
+{
+  "name": "@adoratorio/vite-starter",
+  "version": "0.0.1",
+  "description": "A custom development and production server based on Vite for Vue projects",
+  "main": "app/index.js",
+  "scripts": {
+    "serve": "npm run dev",
+    "dev": "node app/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vite",
+    "server",
+    "development",
+    "vue"
+  ],
+  "author": "Daniele Borra <daniele@adoratorio.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.2.1",
+    "@vue/server-renderer": "^3.0.11",
+    "chalk": "^4.1.0",
+    "express": "^4.17.1",
+    "sass": "^1.32.8",
+    "vite": "^2.1.5"
+  },
+  "dependencies": {
+    "vue": "^3.0.11",
+    "vue-router": "^4.0.6"
+  }
+}
