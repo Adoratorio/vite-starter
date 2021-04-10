@@ -1,3 +1,4 @@
+const path = require('path');
 const vuePlugin = require('@vitejs/plugin-vue');
 
 module.exports = {
@@ -10,6 +11,13 @@ module.exports = {
       { find: '@', replacement: '/src' },
       { find: '~', replacement: '/src' },
     ],
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "${path.resolve(__dirname, 'src/scss/global.scss')}";`,
+      },
+    },
   },
   build: {
     minify: false,
