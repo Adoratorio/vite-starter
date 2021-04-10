@@ -1,5 +1,7 @@
 <template>
-  <div class="c-app-title title" v-html="content"></div>
+  <div class="c-app-title title">
+    <h1 v-html="content"></h1>
+  </div>
 </template>
 
 <script>

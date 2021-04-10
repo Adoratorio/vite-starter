@@ -1,5 +1,12 @@
 <template>
   <div class="app">
+    <RouterLink to="/">
+      <span>Home</span>
+    </RouterLink>
+    <RouterLink to="/about">
+      <span>About</span>
+    </RouterLink>
+
     <RouterView />
   </div>
 </template>

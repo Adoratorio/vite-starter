@@ -1,6 +1,6 @@
 <template>
-  <div class="view home">
-    <AppTitle :content="'Home'" />
+  <div class="view about">
+    <AppTitle :content="'About'" />
   </div>
 </template>
 
@@ -8,11 +8,11 @@
 import AppTitle from '../components/AppTitle.vue';
 
 export default {
-  name: 'Home',
-
+  name: 'About',
+  
   components: {
     AppTitle,
-  }
+  },
 };
 </script>
 

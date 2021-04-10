@@ -4,7 +4,8 @@ module.exports = {
   plugins: [
     vuePlugin(),
   ],
+  clearScreen: false,
   build: {
-    minify: true
+    minify: false
   },
 };
