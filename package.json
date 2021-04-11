@@ -9,7 +9,9 @@
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build --ssrManifest --outDir dist/client",
     "build:server": "vite build --ssr server.js --outDir dist/server",
+    "generate": "vite build --ssrManifest --outDir dist/static && yarn build:server && node generate",
     "try": "cross-env NODE_ENV=production node index",
+    "clean": "rm -rf dist",
     "lint": "eslint . && eslint src --ext .js,.vue",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
