@@ -12,6 +12,7 @@ module.exports = {
       { find: '~', replacement: '/src' },
     ],
   },
+  publicDir: 'public',
   css: {
     preprocessorOptions: {
       scss: {

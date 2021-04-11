@@ -4,7 +4,6 @@ const path = require('path');
 const express = require('express');
 const { createServer: createViteServer } = require('vite');
 const chalk = require('chalk');
-const serveStatic = require('serve-static');
 
 const isDev = process.env.NODE_ENV !== 'production';
 const resolve = (p) => path.resolve(__dirname, p);
@@ -17,14 +16,13 @@ async function start() {
   // and link vite as middleware or serve the builded version
   // from dist/client folder if in production
   const app = express();
-  app.use(serveStatic(resolve('public')));
   let vite = null;
   if (isDev) {
     vite = await createViteServer({ server: { middlewareMode: true } });
     app.use(vite.middlewares);
   } else {
     app.use(require('compression')());
-    app.use(serveStatic(resolve('dist/client'), { index: false }));
+    app.use(require('serve-static')(resolve('dist/client'), { index: false }));
   }
 
   // Listen for every request with every method
